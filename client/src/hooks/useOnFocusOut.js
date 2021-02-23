@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 const useOnFocusOut = (ref, handler) => {
   useEffect(() => {
@@ -8,10 +8,10 @@ const useOnFocusOut = (ref, handler) => {
       }
       handler(event);
     };
-    document.addEventListener("focusout", listener);
+    document.addEventListener('focusout', listener);
 
     return () => {
-      document.removeEventListener("focusout", listener);
+      document.removeEventListener('focusout', listener);
     };
   }, [ref, handler]);
 };
