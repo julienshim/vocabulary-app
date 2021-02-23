@@ -1,1 +1,0 @@
-# PERN Vocabulary Ap
