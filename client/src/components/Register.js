@@ -20,6 +20,7 @@ const Register = () => {
       // eslint-disable-next-line no-console
       console.log(parseRes);
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err.message);
     }
   };
