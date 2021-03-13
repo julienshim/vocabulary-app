@@ -9,6 +9,7 @@ const Dashboard = (props) => {
       const accessToken = getAccessToken();
       const response = await fetch('http://localhost:5000/dashboard', {
         method: 'GET',
+        credentials: 'include',
         headers: {
           Authorization: `bearer ${accessToken}`,
         },

@@ -11,6 +11,7 @@ const Register = () => {
       const body = { email, password, name };
       const response = await fetch('http://localhost:5000/auth/register', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-type': 'application/json',
         },
