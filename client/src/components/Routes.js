@@ -1,11 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { Fragment, useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
 import Login from './Login';
@@ -13,42 +8,22 @@ import Register from './Register';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const setAuth = (boolean) => {
-    setIsAuthenticated(boolean);
-  };
 
   const routes = [
     {
       path: '/login',
       exact: true,
-      render: (props) =>
-        !isAuthenticated ? (
-          <Login {...props} setAuth={setAuth} />
-        ) : (
-          <Redirect to="/" />
-        ),
+      render: () => <Login />,
     },
     {
       path: '/register',
       exact: true,
-      render: (props) =>
-        !isAuthenticated ? (
-          <Register {...props} setAuth={setAuth} />
-        ) : (
-          <Redirect to="/login" />
-        ),
+      render: () => <Register />,
     },
     {
-      path: '/',
+      path: '/dashboard',
       exact: true,
-      render: (props) =>
-        isAuthenticated ? (
-          <Dashboard {...props} setAuth={setAuth} />
-        ) : (
-          <Redirect to="/login" />
-        ),
+      render: () => <Dashboard />,
     },
   ];
 
