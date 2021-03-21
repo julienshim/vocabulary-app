@@ -3,3 +3,4 @@ node_modules
 playground/
 config/keys.js
 .DS_Store
+db/tsv
