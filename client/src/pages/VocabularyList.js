@@ -1,8 +1,8 @@
 import React, { useEffect, useReducer, useState } from 'react';
 
 // components
-import AddCardForm from './AddCardForm';
-import CardsList from './CardsList';
+import AddCardForm from '../components/AddCardForm';
+import CardsList from '../components/CardsList';
 
 // reducers
 import cardsReducer from '../reducers/cardsReducers';
@@ -14,7 +14,7 @@ function VocabularyList() {
   const [cards, cardsDispatch] = useReducer(cardsReducer, []);
   const [currentPage, setCurrentPage] = useState(1);
   // eslint-disable-next-line no-unused-vars
-  const [postsPerPage, setPostsPerPage] = useState(30);
+  const [postsPerPage, setPostsPerPage] = useState(20);
   // eslint-disable-next-line no-unused-vars
   const [next, setNext] = useState();
   // eslint-disable-next-line no-unused-vars
@@ -29,6 +29,7 @@ function VocabularyList() {
       setPrevious(jsonData.previous);
       cardsDispatch({ type: 'POPULATE_CARDS', cards: jsonData.results || [] });
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err.messsage);
     }
   };
