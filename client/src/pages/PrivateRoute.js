@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Route, Redirect, useLocation } from 'react-router-dom';
 import UserContext from '../context/user-context';
+import Loader from '../components/Loader';
 
 const PrivateRoute = (props) => {
   const { key, path, exact, render } = props;
@@ -8,7 +9,7 @@ const PrivateRoute = (props) => {
   const location = useLocation();
 
   if (isLoading) {
-    return <div>Loading... </div>;
+    return <Loader />;
   }
 
   if (user) {
