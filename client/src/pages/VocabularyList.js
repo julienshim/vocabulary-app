@@ -1,55 +1,49 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React from 'react';
 
 // components
 import AddCardForm from '../components/AddCardForm';
 import CardsList from '../components/CardsList';
-
-// reducers
-import cardsReducer from '../reducers/cardsReducers';
+import PageNavigation from '../components/PageNavigation';
+import Loader from '../components/Loader';
+import useGetCards from '../hooks/useGetCards';
 
 // context
 import CardsContext from '../context/cards-context';
 
 function VocabularyList() {
-  const [cards, cardsDispatch] = useReducer(cardsReducer, []);
-  const [currentPage, setCurrentPage] = useState(1);
-  // eslint-disable-next-line no-unused-vars
-  const [postsPerPage, setPostsPerPage] = useState(20);
-  // eslint-disable-next-line no-unused-vars
-  const [next, setNext] = useState();
-  // eslint-disable-next-line no-unused-vars
-  const [previous, setPrevious] = useState();
+  const {
+    cards,
+    cardsDispatch,
+    isLoading,
+    cardsPerPage,
+    totalCards,
+    currentPage,
+    setCurrentPage,
+    previous,
+    next,
+  } = useGetCards();
 
-  const getCards = async () => {
-    try {
-      const uri = `http://localhost:5000/cards?page=${currentPage}&limit=${postsPerPage}`;
-      const response = await fetch(uri);
-      const jsonData = await response.json();
-      setNext(jsonData.next);
-      setPrevious(jsonData.previous);
-      cardsDispatch({ type: 'POPULATE_CARDS', cards: jsonData.results || [] });
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err.messsage);
-    }
-  };
-
-  useEffect(() => {
-    getCards();
-  }, []);
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <CardsContext.Provider
       value={{
         cards,
         cardsDispatch,
+        isLoading,
+        cardsPerPage,
+        totalCards,
+        currentPage,
+        next,
+        previous,
+        setCurrentPage,
       }}
     >
-      <CardsList
-        setCurrentPage={setCurrentPage}
-        setPostsPerPage={postsPerPage}
-      />
+      <CardsList />
       <AddCardForm />
+      <PageNavigation />
     </CardsContext.Provider>
   );
 }
