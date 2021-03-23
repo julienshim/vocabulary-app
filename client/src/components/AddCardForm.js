@@ -2,7 +2,9 @@ import React, { Fragment, useState, useContext } from 'react';
 import CardsContext from '../context/cards-context';
 
 const AddCardForm = () => {
-  const { cards, cardsDispatch } = useContext(CardsContext);
+  const { cards, cardsDispatch, totalCards, setTotalCards } = useContext(
+    CardsContext
+  );
 
   const [deck, setDeck] = useState('');
   const [korean, setKorean] = useState('');
@@ -47,7 +49,9 @@ const AddCardForm = () => {
       setEnglish('');
       setHanja('');
       setOnMaster(false);
+      setTotalCards(totalCards + 1);
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err.message);
     }
   };
