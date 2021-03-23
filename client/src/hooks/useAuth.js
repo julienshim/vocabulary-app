@@ -71,7 +71,21 @@ const useAuth = () => {
     }
   };
 
-  return { registerUser, loginUser, error };
+  const logoutUser = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/auth/logout', {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      const parseRes = await response.json();
+      setAccessToken(parseRes.accessToken);
+      setUser(null);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  return { registerUser, loginUser, logoutUser, error };
 };
 
 export default useAuth;
