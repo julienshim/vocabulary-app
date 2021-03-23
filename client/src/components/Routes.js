@@ -1,18 +1,21 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navigation from './Navigation';
+
+// Pages
 import Dashboard from '../pages/Dashboard';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import VocabularyList from '../pages/VocabularyList';
 import PrivateRoute from '../pages/PrivateRoute';
+import Profile from '../pages/Profile';
+import Settings from '../pages/Settings';
+
 import UserContext from '../context/user-context';
-import useGetUser from '../hooks/useGetUser';
+import useFindUser from '../hooks/useFindUser';
 
 const Routes = () => {
-  const { isLoading, user } = useGetUser();
-
+  const { user, setUser, isLoading } = useFindUser();
   const routes = [
     {
       path: '/login',
@@ -27,28 +30,36 @@ const Routes = () => {
       render: () => <Register />,
     },
     {
-      path: '/dashboard',
+      path: '/',
       exact: true,
       isPrivate: true,
       render: () => <Dashboard />,
     },
     {
-      path: '/cards',
+      path: '/vocabulary-list',
       exact: true,
       isPrivate: true,
       render: () => <VocabularyList />,
     },
+    {
+      path: '/profile',
+      exact: true,
+      isPrivate: true,
+      render: () => <Profile />,
+    },
+    {
+      path: '/settings',
+      exact: true,
+      isPrivate: true,
+      render: () => <Settings />,
+    },
   ];
-
-  if (isLoading) {
-    return <div>Loading Routes...</div>;
-  }
 
   return (
     <Fragment>
       <Router>
         <div className="container">
-          <UserContext.Provider value={{ user }}>
+          <UserContext.Provider value={{ user, setUser, isLoading }}>
             <Navigation />
             <Switch>
               {routes.map((route, index) => {
