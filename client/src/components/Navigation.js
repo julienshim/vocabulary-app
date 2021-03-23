@@ -1,14 +1,22 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../context/user-context';
+import useAuth from '../hooks/useAuth';
 
 const Navigation = () => {
   const { user } = useContext(UserContext);
+  const { logoutUser } = useAuth();
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isShown, setIsShown] = useState(false);
 
   const handleToggleIsCollapse = () => {
     setIsCollapsed(!isCollapsed);
+  };
+
+  const logout = async () => {
+    setIsShown(false);
+    await logoutUser();
   };
 
   return (
@@ -59,24 +67,22 @@ const Navigation = () => {
               onKeyUp={() => setIsShown(!isShown)}
               tabIndex={0}
             >
-              {user && (
-                <div
-                  style={{
-                    backgroundColor: '#ccc',
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  {'Finster Unitus'
-                    .split(' ')
-                    .map((x) => x.slice(0, 1).toUpperCase())
-                    .join('')}
-                </div>
-              )}
+              <div
+                style={{
+                  backgroundColor: '#ccc',
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                {user?.user_name
+                  .split(' ')
+                  .map((x) => x.slice(0, 1).toUpperCase())
+                  .join('')}
+              </div>
             </a>
             <ul
               className={`dropdown-menu dropdown-menu-right${
@@ -91,7 +97,7 @@ const Navigation = () => {
                 </a>
               </li>
               <li>
-                <a className="dropdown-item" href="/#">
+                <a className="dropdown-item" href="/settings">
                   Settings
                 </a>
               </li>
@@ -99,7 +105,13 @@ const Navigation = () => {
                 <hr className="dropdown-divider" />
               </li>
               <li>
-                <a className="dropdown-item" href="/#">
+                <a
+                  className="dropdown-item"
+                  role="button"
+                  tabIndex={0}
+                  onClick={logout}
+                  onKeyUp={logout}
+                >
                   Logout
                 </a>
               </li>
