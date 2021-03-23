@@ -14,7 +14,7 @@ const PageNavigation = () => {
     isLoading,
   } = useContext(CardsContext);
 
-  let pageNumbers = [];
+  const pageNumbers = [];
 
   const lastPage = Math.ceil(totalCards / cardsPerPage);
 
@@ -24,17 +24,17 @@ const PageNavigation = () => {
     }
   }
 
+  let sliceStart = 0;
+  let sliceEnd = lastPage;
+
   if (lastPage > 5) {
     if (currentPage < 5) {
-      if (currentPage === 4 && lastPage < 8) {
-        pageNumbers = pageNumbers.slice(0, 5);
-      } else {
-        pageNumbers = pageNumbers.slice(0, 4);
-      }
+      sliceEnd = currentPage === 4 && lastPage < 8 ? 5 : 4;
     } else if (currentPage > lastPage - 4) {
-      pageNumbers = pageNumbers.slice(lastPage - 6);
+      sliceStart = lastPage - 6;
     } else {
-      pageNumbers = pageNumbers.slice(currentPage - 4, currentPage + 1);
+      sliceStart = currentPage - 4;
+      sliceEnd = currentPage + 1;
     }
   }
 
@@ -43,7 +43,10 @@ const PageNavigation = () => {
   }
 
   return (
-    <nav aria-label="Page navigation">
+    <nav
+      aria-label="Page navigation"
+      style={{ display: 'flex', justifyContent: 'center' }}
+    >
       <ul className="pagination">
         <li className={`page-item ${previous === null ? ' disabled' : ''}`}>
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
@@ -83,7 +86,7 @@ const PageNavigation = () => {
             <a className="page-link">...</a>
           </li>
         )}
-        {pageNumbers.map((number) => {
+        {pageNumbers.slice(sliceStart, sliceEnd).map((number) => {
           const isCurrentPage = number === currentPage;
           return (
             <li className={`page-item ${isCurrentPage && ' active'}`}>
