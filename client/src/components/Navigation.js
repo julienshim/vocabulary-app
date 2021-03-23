@@ -42,83 +42,85 @@ const Navigation = () => {
           tabIndex={0}
         />
       </button>
-      <div
-        className={`${isCollapsed ? 'collapse' : ''} navbar-collapse`}
-        id="navbarText"
-      >
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link className="nav-link" to="/vocabulary-list">
-              Vocabulary List
-            </Link>
-          </li>
-        </ul>
-        <ul className="navbar-nav">
-          <li className="nav-item dropdown">
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a
-              className={`nav-link dropdown-toggle${isShown ? ' show' : ''}`}
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded={isShown}
-              style={{ display: 'flex' }}
-              onClick={() => setIsShown(!isShown)}
-              onKeyUp={() => setIsShown(!isShown)}
-              tabIndex={0}
-            >
-              <div
-                style={{
-                  backgroundColor: '#ccc',
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
+      {user && (
+        <div
+          className={`${isCollapsed ? 'collapse' : ''} navbar-collapse`}
+          id="navbarText"
+        >
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link className="nav-link" to="/vocabulary-list">
+                Vocabulary List
+              </Link>
+            </li>
+          </ul>
+          <ul className="navbar-nav">
+            <li className="nav-item dropdown">
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+              <a
+                className={`nav-link dropdown-toggle${isShown ? ' show' : ''}`}
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded={isShown}
+                style={{ display: 'flex' }}
+                onClick={() => setIsShown(!isShown)}
+                onKeyUp={() => setIsShown(!isShown)}
+                tabIndex={0}
               >
-                {user?.user_name
-                  .split(' ')
-                  .map((x) => x.slice(0, 1).toUpperCase())
-                  .join('')}
-              </div>
-            </a>
-            <ul
-              className={`dropdown-menu dropdown-menu-right${
-                isShown ? ' show' : ''
-              }`}
-              aria-labelledby="navbarDropdown"
-              data-bs-popper={isShown ? 'none' : ''}
-            >
-              <li>
-                <a className="dropdown-item" href="/profile">
-                  My Profile
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="/settings">
-                  Settings
-                </a>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              <li>
-                <a
-                  className="dropdown-item"
-                  role="button"
-                  tabIndex={0}
-                  onClick={logout}
-                  onKeyUp={logout}
+                <div
+                  style={{
+                    backgroundColor: '#ccc',
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
                 >
-                  Logout
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+                  {user?.user_name
+                    .split(' ')
+                    .map((x) => x.slice(0, 1).toUpperCase())
+                    .join('')}
+                </div>
+              </a>
+              <ul
+                className={`dropdown-menu dropdown-menu-right${
+                  isShown ? ' show' : ''
+                }`}
+                aria-labelledby="navbarDropdown"
+                data-bs-popper={isShown ? 'none' : ''}
+              >
+                <li>
+                  <a className="dropdown-item" href="/profile">
+                    My Profile
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/settings">
+                    Settings
+                  </a>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    role="button"
+                    tabIndex={0}
+                    onClick={logout}
+                    onKeyUp={logout}
+                  >
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      )}
     </nav>
   );
 };
