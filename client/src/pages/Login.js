@@ -5,18 +5,17 @@ import useAuth from '../hooks/useAuth';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { loginUser, error } = useAuth();
+  const { loginUser } = useAuth();
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     const body = { email, password };
-    loginUser(body);
+    await loginUser(body);
   };
 
   return (
     <Fragment>
       <h1 className="text-center my-5">Login</h1>
-      <div className="invalid-feedback">{error && error.messsage} </div>
       <form onSubmit={onSubmitForm}>
         <input
           type="text"
