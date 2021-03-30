@@ -26,6 +26,8 @@ module.exports = (model) => {
       };
     }
 
+    results.total_cards = cardCount.rows[0].count;
+
     try {
       const allCards = await pool.query(
         `SELECT * FROM ${model} ORDER BY card_id LIMIT ${limit} OFFSET ${startIndex}`
