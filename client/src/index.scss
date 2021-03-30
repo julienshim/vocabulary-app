@@ -1,5 +1,17 @@
 @import 'bootstrap/dist/css/bootstrap.css';
 
+.dropdown-toggle:after {
+  transition: 0.25s;
+  align-self: center;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid;
+}
+
+.dropdown-toggle[aria-expanded='true']:after {
+  transform: rotate(-180deg);
+}
+
 * {
   box-sizing: border-box;
 }
