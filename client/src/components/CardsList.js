@@ -7,16 +7,26 @@ const ListCards = () => {
   return (
     <Fragment>
       <h1>Vocabulary List</h1>
-      <table>
+      <table className="table table-hover">
         <thead>
           <tr>
-            <th>Deck</th>
-            <th>Korean</th>
-            <th>English</th>
-            <th>Hanja</th>
-            <th>onMaster</th>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <th />
+            <th className="your-mom" />
+            <th className="col-width" scope="col">
+              Deck
+            </th>
+            <th className="col-width" scope="col">
+              Korean
+            </th>
+            <th className="col-width" scope="col">
+              English
+            </th>
+            <th className="col-width" scope="col">
+              Hanja
+            </th>
+            <th className="col-width" scope="col">
+              onMaster
+            </th>
           </tr>
         </thead>
         <tbody>
