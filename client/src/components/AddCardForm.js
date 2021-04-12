@@ -12,6 +12,23 @@ const AddCardForm = () => {
   const [hanja, setHanja] = useState('');
   const [onMaster, setOnMaster] = useState(false);
 
+  const addButton = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      style={{
+        boxSizing: 'border-box',
+        position: 'absolute',
+        top: '50%',
+        marginTop: '-6px',
+      }}
+    >
+      <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
+    </svg>
+  );
+
   const addCard = async (e) => {
     // eslint-disable-next-line no-console
     e.preventDefault();
@@ -59,10 +76,29 @@ const AddCardForm = () => {
   return (
     <Fragment>
       <form onSubmit={addCard}>
-        <table>
+        <table
+          className="table table-hover"
+          style={{ backgroundColor: '#f8f9fa' }}
+        >
           <tbody>
-            <tr style={{ backgroundColor: 'red' }}>
-              <td>
+            <tr>
+              <td className="add-td">
+                <div className="inline-container">
+                  <div
+                    onClick={(e) => addCard(e)}
+                    onKeyUp={(e) => addCard(e)}
+                    role="button"
+                    tabIndex={0}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {addButton}
+                  </div>
+                </div>
+              </td>
+              <td className="col-width">
                 <div className="inline-container">
                   <input
                     className="form-input"
@@ -72,7 +108,7 @@ const AddCardForm = () => {
                   />
                 </div>
               </td>
-              <td>
+              <td className="col-width">
                 <div className="inline-container">
                   <input
                     className="form-input"
@@ -82,7 +118,7 @@ const AddCardForm = () => {
                   />
                 </div>
               </td>
-              <td>
+              <td className="col-width">
                 <div className="inline-container">
                   <input
                     className="form-input"
@@ -92,7 +128,7 @@ const AddCardForm = () => {
                   />
                 </div>
               </td>
-              <td>
+              <td className="col-width">
                 <div className="inline-container">
                   <input
                     className="form-input"
@@ -102,7 +138,7 @@ const AddCardForm = () => {
                   />
                 </div>
               </td>
-              <td>
+              <td className="col-width">
                 <div>
                   <input
                     className="checkbox"
@@ -110,13 +146,6 @@ const AddCardForm = () => {
                     checked={onMaster}
                     onChange={() => setOnMaster(!onMaster)}
                   />
-                </div>
-              </td>
-              <td>
-                <div>
-                  <button type="button" onClick={(e) => addCard(e)}>
-                    Add
-                  </button>
                 </div>
               </td>
             </tr>
