@@ -13,6 +13,23 @@ const Card = (props) => {
   const [hanja, setHanja] = useState(card.hanja || '');
   const [onmaster, setOnMaster] = useState(card.onmaster);
 
+  const deleteButton = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      style={{
+        boxSizing: 'border-box',
+        position: 'absolute',
+        top: '50%',
+        marginTop: '-6px',
+      }}
+    >
+      <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+    </svg>
+  );
+
   const updateCard = useCallback(
     async (card_id) => {
       try {
@@ -41,6 +58,7 @@ const Card = (props) => {
           });
         }
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.error(err.message);
       }
     },
@@ -58,6 +76,7 @@ const Card = (props) => {
         cardsDispatch({ type: 'REMOVE_CARD', card_id });
       }
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err.message);
     }
   };
@@ -67,34 +86,42 @@ const Card = (props) => {
   }, [card.card_id, updateCard]);
 
   return (
-    <tr>
-      <td>
+    <tr className="card-row">
+      <td className="remove-td">
+        <div className="inline-container">
+          <div
+            onClick={() => deleteCard(card.card_id)}
+            onKeyUp={() => deleteCard(card.card_id)}
+            role="button"
+            tabIndex={0}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            {deleteButton}
+          </div>
+        </div>
+      </td>
+      <td className="col-width">
         <InlineEdit text={deck} setText={setDeck} />
       </td>
-      <td>
+      <td className="col-width">
         <InlineEdit text={korean} setText={setKorean} />
       </td>
-      <td>
+      <td className="col-width">
         <InlineEdit text={english} setText={setEnglish} />
       </td>
-      <td>
+      <td className="col-width">
         <InlineEdit text={hanja} setText={setHanja} />
       </td>
-      <td>
+      <td className="col-width">
         <div className="inline-container">
           <input
             type="checkbox"
             checked={onmaster}
             onChange={() => setOnMaster(!onmaster)}
           />
-        </div>
-      </td>
-
-      <td>
-        <div className="inline-container">
-          <button type="button" onClick={() => deleteCard(card.card_id)}>
-            Delete
-          </button>
         </div>
       </td>
     </tr>
