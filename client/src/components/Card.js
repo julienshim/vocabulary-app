@@ -86,20 +86,22 @@ const Card = (props) => {
   }, [card.card_id, updateCard]);
 
   return (
-    <tr className="card-row">
-      <td className="remove-td">
-        <div className="inline-container">
-          <div
-            onClick={() => deleteCard(card.card_id)}
-            onKeyUp={() => deleteCard(card.card_id)}
-            role="button"
-            tabIndex={0}
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
-            {deleteButton}
+    <tr className={`${onmaster ? 'table-info ' : ''}card-row`}>
+      <td>
+        <div className="remove-td">
+          <div className="inline-container">
+            <div
+              onClick={() => deleteCard(card.card_id)}
+              onKeyUp={() => deleteCard(card.card_id)}
+              role="button"
+              tabIndex={0}
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >
+              {deleteButton}
+            </div>
           </div>
         </div>
       </td>
