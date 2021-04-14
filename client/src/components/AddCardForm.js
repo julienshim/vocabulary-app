@@ -82,19 +82,21 @@ const AddCardForm = () => {
         >
           <tbody>
             <tr>
-              <td className="add-td">
-                <div className="inline-container">
-                  <div
-                    onClick={(e) => addCard(e)}
-                    onKeyUp={(e) => addCard(e)}
-                    role="button"
-                    tabIndex={0}
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {addButton}
+              <td>
+                <div className="add-td">
+                  <div className="inline-container">
+                    <div
+                      onClick={(e) => addCard(e)}
+                      onKeyUp={(e) => addCard(e)}
+                      role="button"
+                      tabIndex={0}
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {addButton}
+                    </div>
                   </div>
                 </div>
               </td>
