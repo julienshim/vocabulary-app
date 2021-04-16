@@ -13,9 +13,6 @@ const ListCards = () => {
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <th className="your-mom" />
             <th className="col-width" scope="col">
-              Deck
-            </th>
-            <th className="col-width" scope="col">
               Korean
             </th>
             <th className="col-width" scope="col">
