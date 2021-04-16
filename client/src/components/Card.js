@@ -7,7 +7,6 @@ const Card = (props) => {
 
   const { cardsDispatch } = useContext(CardsContext);
 
-  const [deck, setDeck] = useState(card.deck);
   const [korean, setKorean] = useState(card.korean);
   const [english, setEnglish] = useState(card.english);
   const [hanja, setHanja] = useState(card.hanja || '');
@@ -34,7 +33,6 @@ const Card = (props) => {
     async (card_id) => {
       try {
         const body = {
-          deck,
           korean,
           english,
           hanja,
@@ -50,7 +48,6 @@ const Card = (props) => {
         if (response) {
           cardsDispatch({
             type: 'EDIT_CARD',
-            deck,
             korean,
             english,
             hanja,
@@ -62,7 +59,7 @@ const Card = (props) => {
         console.error(err.message);
       }
     },
-    [deck, korean, english, hanja, onmaster, cardsDispatch]
+    [korean, english, hanja, onmaster, cardsDispatch]
   );
 
   const deleteCard = async (card_id) => {
@@ -104,9 +101,6 @@ const Card = (props) => {
             </div>
           </div>
         </div>
-      </td>
-      <td className="col-width">
-        <InlineEdit text={deck} setText={setDeck} />
       </td>
       <td className="col-width">
         <InlineEdit text={korean} setText={setKorean} />
