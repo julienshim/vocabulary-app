@@ -9,7 +9,6 @@ const cardsReducer = (state, action) => {
         ...state,
         {
           card_id: action.card_id,
-          deck: action.deck,
           korean: action.korean,
           english: action.english,
           hanja: action.hanja,
@@ -21,7 +20,6 @@ const cardsReducer = (state, action) => {
         card.card_id === action.card_id
           ? {
               card_id: action.card_id,
-              deck: action.deck,
               korean: action.korean,
               english: action.english,
               hanja: action.hanja,
