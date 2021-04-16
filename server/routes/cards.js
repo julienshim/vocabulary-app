@@ -5,10 +5,10 @@ const paginatedResults = require('../middlewares/paginatedResults');
 
 router.post('/add', async (req, res) => {
   try {
-    const { deck, korean, english, hanja, onMaster } = req.body;
+    const { korean, english, hanja, onMaster } = req.body;
     const newCard = await pool.query(
-      'INSERT INTO cards (deck, korean, english, hanja, onMaster) VALUES($1, $2, $3, $4, $5) RETURNING *',
-      [Number(deck), korean, english, hanja, Boolean(onMaster)]
+      'INSERT INTO cards (korean, english, hanja, onMaster) VALUES($1, $2, $3, $4) RETURNING *',
+      [korean, english, hanja, Boolean(onMaster)]
     );
     res.send(newCard.rows[0]);
   } catch (err) {
@@ -35,10 +35,10 @@ router.get('/:id', async (req, res) => {
 router.put('/update/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { deck, korean, english, hanja, onMaster } = req.body;
+    const { korean, english, hanja, onMaster } = req.body;
     const updateCard = await pool.query(
-      'UPDATE cards SET deck = $1, korean = $2, english = $3, hanja = $4, onMaster = $5 WHERE card_id = $6 RETURNING *',
-      [Number(deck), korean, english, hanja, Boolean(onMaster), id]
+      'UPDATE cards SET korean = $1, english = $2, hanja = $3, onMaster = $4 WHERE card_id = $5 RETURNING *',
+      [korean, english, hanja, Boolean(onMaster), id]
     );
     res.json(updateCard.rows[0]);
   } catch (err) {
