@@ -2,11 +2,8 @@ import React, { Fragment, useState, useContext } from 'react';
 import CardsContext from '../context/cards-context';
 
 const AddCardForm = () => {
-  const { cards, cardsDispatch, totalCards, setTotalCards } = useContext(
-    CardsContext
-  );
+  const { cardsDispatch, totalCards, setTotalCards } = useContext(CardsContext);
 
-  const [deck, setDeck] = useState('');
   const [korean, setKorean] = useState('');
   const [english, setEnglish] = useState('');
   const [hanja, setHanja] = useState('');
@@ -34,7 +31,6 @@ const AddCardForm = () => {
     e.preventDefault();
     try {
       const body = {
-        deck,
         korean,
         english,
         hanja,
@@ -54,14 +50,12 @@ const AddCardForm = () => {
         cardsDispatch({
           type: 'ADD_CARD',
           card_id: jsonData.card_id,
-          deck,
           korean,
           english,
           hanja,
           onMaster: !!onMaster,
         });
       }
-      setDeck(Math.ceil(cards.length / 30));
       setKorean('');
       setEnglish('');
       setHanja('');
@@ -98,16 +92,6 @@ const AddCardForm = () => {
                       {addButton}
                     </div>
                   </div>
-                </div>
-              </td>
-              <td className="col-width">
-                <div className="inline-container">
-                  <input
-                    className="form-input"
-                    type="text"
-                    value={deck}
-                    onChange={(e) => setDeck(e.target.value)}
-                  />
                 </div>
               </td>
               <td className="col-width">
