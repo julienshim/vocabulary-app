@@ -21,12 +21,14 @@ app.use(cookieParser());
 
 // routes
 const cardsRouter = require('./routes/cards');
+const referenceRouter = require('./routes/reference');
 const authRouter = require('./routes/auth');
 const dashboardRouter = require('./routes/dashboard');
 const refreshRouter = require('./routes/renew');
 const revokeRouter = require('./routes/revoke');
 
 app.use('/cards', cardsRouter);
+app.use('/reference', referenceRouter);
 app.use('/auth', authRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/renewAccessToken', refreshRouter);
