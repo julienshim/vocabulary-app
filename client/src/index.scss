@@ -41,7 +41,7 @@ table {
 .inline-container {
   height: 48px;
   position: relative;
-  background: lightseagreen;
+  // background: lightseagreen;
 }
 
 .inline-div,
@@ -68,14 +68,23 @@ table {
   }
 }
 
-td,
-th {
+td.col-width,
+th.col-width {
   min-width: 160px;
 }
 
 div.form-div {
   background: pink;
 }
+
+.remove-td, .add-td {
+  visibility: hidden;
+}
+
+tr:hover .remove-td, tr:hover .add-td {
+  visibility: visible;
+}
+
 
 // .Note {
 //   background-color: #ffd;
