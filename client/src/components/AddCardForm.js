@@ -134,6 +134,11 @@ const AddCardForm = () => {
                   />
                 </div>
               </td>
+              <td style={{ display: 'none' }}>
+                <div>
+                  <input type="submit" />
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
