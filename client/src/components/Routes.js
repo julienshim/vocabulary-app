@@ -10,6 +10,7 @@ import VocabularyList from '../pages/VocabularyList';
 import PrivateRoute from '../pages/PrivateRoute';
 import Profile from '../pages/Profile';
 import Settings from '../pages/Settings';
+import Hanja from '../pages/Hanja';
 
 import UserContext from '../context/user-context';
 import useFindUser from '../hooks/useFindUser';
@@ -40,6 +41,12 @@ const Routes = () => {
       exact: true,
       isPrivate: true,
       render: () => <VocabularyList />,
+    },
+    {
+      path: '/hanja',
+      exact: true,
+      isPrivate: true,
+      render: () => <Hanja />,
     },
     {
       path: '/profile',
