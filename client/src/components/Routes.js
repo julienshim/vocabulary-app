@@ -6,11 +6,12 @@ import Navigation from './Navigation';
 import Dashboard from '../pages/Dashboard';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
-import VocabularyList from '../pages/VocabularyList';
+import Vocabulary from '../pages/Vocabulary';
 import PrivateRoute from '../pages/PrivateRoute';
 import Profile from '../pages/Profile';
 import Settings from '../pages/Settings';
 import Hanja from '../pages/Hanja';
+import Reference from '../pages/Reference';
 
 import UserContext from '../context/user-context';
 import useFindUser from '../hooks/useFindUser';
@@ -37,16 +38,22 @@ const Routes = () => {
       render: () => <Dashboard />,
     },
     {
-      path: '/vocabulary-list',
+      path: '/vocabulary',
       exact: true,
       isPrivate: true,
-      render: () => <VocabularyList />,
+      render: () => <Vocabulary />,
     },
     {
       path: '/hanja',
       exact: true,
       isPrivate: true,
       render: () => <Hanja />,
+    },
+    {
+      path: '/reference',
+      exact: true,
+      isPrivate: true,
+      render: () => <Reference />,
     },
     {
       path: '/profile',
@@ -72,7 +79,7 @@ const Routes = () => {
               {routes.map((route, index) => {
                 return route.isPrivate ? (
                   <PrivateRoute
-                    key={`route-${index * Date.now()}`}
+                    key={`private-route-${index * Date.now()}`}
                     path={route.path}
                     exact={route.exact}
                     render={route.render}
