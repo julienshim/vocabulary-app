@@ -49,13 +49,18 @@ const Navigation = () => {
         >
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/vocabulary-list">
-                Vocabulary List
+              <Link className="nav-link" to="/vocabulary">
+                Vocabulary
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/hanja">
                 Hanja
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/reference">
+                Reference
               </Link>
             </li>
           </ul>
