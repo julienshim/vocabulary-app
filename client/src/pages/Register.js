@@ -6,11 +6,12 @@ const Register = () => {
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { registerUser, error } = useAuth();
+  const { registerUser, setError, error } = useAuth();
 
   // eslint-disable-next-line no-unused-vars
   const onSubmitForm = async (e) => {
     e.preventDefault();
+    setError('null');
     const body = { email, name, username, password };
     registerUser(body);
   };
@@ -28,6 +29,7 @@ const Register = () => {
           onChange={(e) => setEmail(e.target.value)}
           className="form-control my-3"
         />
+        {(error === '2' || error === '0') && <span>Email is taken.</span>}
         <input
           type="text"
           name="name"
@@ -44,6 +46,7 @@ const Register = () => {
           onChange={(e) => setUsername(e.target.value)}
           className="form-control my-3"
         />
+        {(error === '2' || error === '1') && <span>Username is taken.</span>}
         <input
           type="password"
           name="password"
