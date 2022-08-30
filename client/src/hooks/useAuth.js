@@ -1,10 +1,10 @@
 import { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/user-context';
 import { setAccessToken, getAccessToken } from '../accessToken';
 
 const useAuth = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
   const [error, setError] = useState(null);
 
@@ -20,7 +20,7 @@ const useAuth = () => {
       });
       const parseRes = await response.json();
       setUser(parseRes);
-      history.push('/');
+      navigate.push('/');
     } catch (err) {
       // eslint-disable-next-line no-console
       setError(err.message);
@@ -39,9 +39,17 @@ const useAuth = () => {
       });
       const parseRes = await response.json();
       if (parseRes) {
-        setAccessToken(parseRes.accessToken);
-        await setUserContext();
+        // eslint-disable-next-line no-console
+        if (parseRes.errorMessage) {
+          setError(parseRes.errorMessage);
+        } else if (parseRes.accessToken) {
+          setError(null);
+          setAccessToken(parseRes.accessToken);
+          await setUserContext();
+        }
       }
+      // eslint-disable-next-line no-console
+      console.log(error);
       // eslint-disable-next-line no-console
     } catch (err) {
       // eslint-disable-next-line no-console
@@ -64,9 +72,9 @@ const useAuth = () => {
       if (parseRes) {
         setAccessToken(parseRes.accessToken);
         await setUserContext();
+        return true;
       }
     } catch (err) {
-      // eslint-disable-next-line no-console
       setError(err.message);
     }
   };
@@ -85,7 +93,7 @@ const useAuth = () => {
     }
   };
 
-  return { registerUser, loginUser, logoutUser, error };
+  return { registerUser, loginUser, logoutUser, setError, error };
 };
 
 export default useAuth;
