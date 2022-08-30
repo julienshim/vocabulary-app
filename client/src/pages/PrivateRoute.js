@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { Route, Redirect, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, Outlet } from 'react-router-dom';
 import UserContext from '../context/user-context';
 import Loader from '../components/Loader';
 
 const PrivateRoute = (props) => {
-  const { key, path, exact, render } = props;
+  // const { key, path, exact, render } = props;
   const { user, isLoading } = useContext(UserContext);
   const location = useLocation();
 
@@ -13,11 +13,15 @@ const PrivateRoute = (props) => {
   }
 
   if (user) {
-    return <Route key={key} path={path} exact={exact} render={render} />;
+    <Outlet />;
+    // return <Route key={key} path={path} exact={exact} render={render} />;
   }
 
   return (
-    <Redirect to={{ pathname: '/login', state: { from: location.pathname } }} />
+    <Navigate
+      replace
+      to={{ pathname: '/login', state: { from: location.pathname } }}
+    />
   );
 };
 
