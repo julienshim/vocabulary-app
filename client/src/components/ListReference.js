@@ -13,7 +13,9 @@ const ListReference = () => {
         <thead>
           <tr>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <th />
+            <th className="col-width" scope="col">
+              Frequency
+            </th>
             <th className="col-width" scope="col">
               Korean
             </th>
@@ -24,7 +26,12 @@ const ListReference = () => {
               Hanja
             </th>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <th />
+            <th className="col-width" scope="col">
+              Hint
+            </th>
+            <th className="col-width" scope="col">
+              Level
+            </th>
             {/* <th className="col-width" scope="col">
               onMaster
             </th> */}
