@@ -1,8 +1,10 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import CardsContext from '../context/cards-context';
+import useGetCards from '../hooks/useGetCards';
 
 const AddCardForm = () => {
-  const { cardsDispatch, totalCards, setTotalCards } = useContext(CardsContext);
+  const { cardsDispatch } = useContext(CardsContext);
+  const { totalCards, setTotalCards } = useGetCards();
 
   const [korean, setKorean] = useState('');
   const [english, setEnglish] = useState('');
@@ -68,82 +70,80 @@ const AddCardForm = () => {
   };
 
   return (
-    <Fragment>
-      <form onSubmit={addCard}>
-        <table
-          className="table table-hover"
-          style={{ backgroundColor: '#f8f9fa' }}
-        >
-          <tbody>
-            <tr>
-              <td>
-                <div className="add-td">
-                  <div className="inline-container">
-                    <div
-                      onClick={(e) => addCard(e)}
-                      onKeyUp={(e) => addCard(e)}
-                      role="button"
-                      tabIndex={0}
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      {addButton}
-                    </div>
+    <form onSubmit={addCard}>
+      <table
+        className="table table-hover"
+        style={{ backgroundColor: '#f8f9fa' }}
+      >
+        <tbody>
+          <tr>
+            <td>
+              <div className="add-td">
+                <div className="inline-container">
+                  <div
+                    onClick={(e) => addCard(e)}
+                    onKeyUp={(e) => addCard(e)}
+                    role="button"
+                    tabIndex={0}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {addButton}
                   </div>
                 </div>
-              </td>
-              <td className="col-width">
-                <div className="inline-container">
-                  <input
-                    className="form-input"
-                    type="text"
-                    value={korean}
-                    onChange={(e) => setKorean(e.target.value)}
-                  />
-                </div>
-              </td>
-              <td className="col-width">
-                <div className="inline-container">
-                  <input
-                    className="form-input"
-                    type="text"
-                    value={english}
-                    onChange={(e) => setEnglish(e.target.value)}
-                  />
-                </div>
-              </td>
-              <td className="col-width">
-                <div className="inline-container">
-                  <input
-                    className="form-input"
-                    type="text"
-                    value={hanja}
-                    onChange={(e) => setHanja(e.target.value)}
-                  />
-                </div>
-              </td>
-              <td className="col-width">
-                <div>
-                  <input
-                    className="checkbox"
-                    type="checkbox"
-                    checked={onMaster}
-                    onChange={() => setOnMaster(!onMaster)}
-                  />
-                </div>
-              </td>
-              <td style={{ display: 'none' }}>
-                <div>
-                  <input type="submit" />
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-    </Fragment>
+              </div>
+            </td>
+            <td className="col-width">
+              <div className="inline-container">
+                <input
+                  className="form-input"
+                  type="text"
+                  value={korean}
+                  onChange={(e) => setKorean(e.target.value)}
+                />
+              </div>
+            </td>
+            <td className="col-width">
+              <div className="inline-container">
+                <input
+                  className="form-input"
+                  type="text"
+                  value={english}
+                  onChange={(e) => setEnglish(e.target.value)}
+                />
+              </div>
+            </td>
+            <td className="col-width">
+              <div className="inline-container">
+                <input
+                  className="form-input"
+                  type="text"
+                  value={hanja}
+                  onChange={(e) => setHanja(e.target.value)}
+                />
+              </div>
+            </td>
+            <td className="col-width">
+              <div>
+                <input
+                  className="checkbox"
+                  type="checkbox"
+                  checked={onMaster}
+                  onChange={() => setOnMaster(!onMaster)}
+                />
+              </div>
+            </td>
+            <td style={{ display: 'none' }}>
+              <div>
+                <input type="submit" />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
   );
 };
 
