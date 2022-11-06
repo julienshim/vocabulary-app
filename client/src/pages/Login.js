@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 const Login = () => {
@@ -7,6 +7,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { loginUser } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
@@ -16,6 +18,8 @@ const Login = () => {
     if (!user) {
       // eslint-disable-next-line no-console
       setError('Invalid email address or password. Please try again.');
+    } else {
+      navigate(location.state.from);
     }
   };
 
