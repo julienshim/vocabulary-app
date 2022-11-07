@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 // components
 import Loader from '../components/Loader';
-import HanjaList from '../components/HanjaList';
+import ListHanja from '../components/ListHanja';
 
 // hooks
 import useGetCards from '../hooks/useGetCards';
@@ -17,13 +17,16 @@ const Hanja = () => {
     return <Loader />;
   }
 
+  const cardsContextProviderValue = useMemo(
+    () => ({
+      cards,
+    }),
+    [cards]
+  );
+
   return (
-    <CardsContext.Provider
-      value={{
-        cards,
-      }}
-    >
-      <HanjaList />
+    <CardsContext.Provider value={cardsContextProviderValue}>
+      <ListHanja />
     </CardsContext.Provider>
   );
 };
