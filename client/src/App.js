@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Routes from './components/Routes';
+import Routing from './components/Routing';
 import { setAccessToken } from './accessToken';
 import Loader from './components/Loader';
 
@@ -31,7 +31,7 @@ const App = () => {
     return <Loader />;
   }
 
-  return <Routes />;
+  return <Routing />;
 };
 
 export default App;
